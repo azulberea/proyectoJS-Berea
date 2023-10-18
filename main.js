@@ -1,89 +1,165 @@
-alert("Bienvenido!")
-let nombre
-do{
-    nombre = prompt("Ingrese su nombre")}
-while(nombre == "")
 
-let utensilio = []
-let cristaleria = []
-let bebidaAlcoholica = []
-let bebidaNoAlcoholica = []
+const botonInicioSesion = document.getElementById("botonInicioSesion")
+const inputUsuario = document.getElementById("nombreDeUsuario")
+const inputContraseña = document.getElementById("contraseña")
+const leyendaInicioSesion = document.getElementById("leyendaInicioSesion")
+const ventanaInicioSesion = document.getElementById("inicioSesion")
 
-function confirmacion(){
-        return confirm("Deseas agregar algo más?")
-}
+botonInicioSesion.addEventListener("click",acceder)
 
-while(true){
-let numProducto = parseInt(prompt(`En cual de nuestros productos estas interesado, ${nombre}? \n1- Utensilios de cocteleria  \n2- Cristaleria \n3- Bebidas alcohólicas \n4- Bebidas no alcohólicas`))
-        switch(numProducto){
-            case 1:
-            utensilio.push(parseInt(prompt(`Qué utensilio estás buscando, ${nombre}? \n1- Barspoon \n2- Coctelera \n3- Colador oruga \n4- Jigger`)));
-            break;
-        case 2:
-            cristaleria.push(parseInt(prompt(`Qué tipo de cristalería estás buscando, ${nombre}? \n1- Vaso Old Fashioned \n2- Vaso Highball \n3- Vaso Hurricane \n4- Copa Cocktail`)));
-            break;
-        case 3:
-            bebidaAlcoholica.push(parseInt(prompt(`Qué bebida alcohólica estás buscando, ${nombre}? \n1- Gin \n2- Vodka \n3- Fernet \n4- Ron blanco`)));
-            break;
-        case 4:
-            bebidaNoAlcoholica.push(parseInt(prompt(`Qué bebida no alcohólica estás buscando, ${nombre}? \n1- Agua tónica \n2- Energizante \n3- Coca-Cola \n4- Gaseosa de pomelo`)));
-            break;
-        default:
-            alert("Ingresa un número válido, por favor");
-            continue;
-        }if(!confirmacion()){
-    break
+function acceder(){
+    if(inputUsuario.value == "" || inputContraseña.value == ""){
+        leyendaInicioSesion.innerText = "Ingrese un usuario y/o contraseña validos"
+        leyendaInicioSesion.className = "denied"
+    }else{
+        ventanaInicioSesion.className = "hidden"
+        localStorage.setItem("nombre de usuario", inputUsuario.value)
+        localStorage.setItem("contraseña", inputContraseña.value)
+        function usuario(nombreDeUsuario,contraseña){
+            this.usuario = nombreDeUsuario
+            this.contraseña = contraseña
+        }
+        const usuario1 = new usuario(localStorage.getItem("nombre de usuario"),localStorage.getItem("contraseña"))
+        console.log(usuario1)
     }
 }
 
-const productosCarrito = []
-for(let x of utensilio){
-    if(x == 1){
-        productosCarrito.push({categoria:"Utensilios", item:"Barspoon", precio:4000})
-    }else if(x == 2){
-        productosCarrito.push({categoria:"Utensilios", item:"Coctelera", precio:6600})
-    }else if(x == 3){
-        productosCarrito.push({categoria:"Utensilios", item:"Colador oruga", precio:3700})
-    }else if(x == 4){
-        productosCarrito.push({categoria:"Utensilios", item:"Jigger", precio:3250})
+let productos = [
+    {id:1, nombre: "barspoon", img:"./public/images/barspoonImg", precio: 4000},
+    {id:2, nombre: "coctelera", img:"./public/images/cocteleraImg.jpg", precio: 6600},
+    {id:3, nombre: "colador", img:"./public/images/coladorOrugaImg.jpg", precio: 3700},
+    {id:4, nombre: "jigger", img:"./public/images/jiggerImg.jpg", precio: 3250}
+]
+
+const addBarspoon = document.getElementById("addBarspoon")
+const addCoctelera = document.getElementById("addCoctelera")
+const addColador = document.getElementById("addColador")
+const addJigger = document.getElementById("addJigger") 
+
+addBarspoon.addEventListener("click",agregarBarspoonAlCarrito)
+addCoctelera.addEventListener("click",agregarCocteleraAlCarrito)
+addColador.addEventListener("click",agregarColadorAlCarrito)
+addJigger.addEventListener("click",agregarJiggerAlCarrito)
+
+let carrito = document.getElementById("carrito")
+let productosCarrito = []
+let elementosCarrito = document.getElementById("elementosCarrito")
+
+function agregarBarspoonAlCarrito(){
+    productosCarrito.push({id:1, nombre: "barspoon", img:"./public/images/barspoonImg", precio: 4000})
+    let divsCarrito = document.createElement("div")
+    const uniqueID = Date.now()
+    divsCarrito.innerHTML = `<div class="containerColumn">
+    <img src=${productos[0].img}></img>
+    <p>Barspoon <br> $4000 <br> <button class="eliminarDelCarrito" id="eliminarDelCarrito${uniqueID}">eliminar</button></p>
+    </div>`
+    elementosCarrito.appendChild(divsCarrito)
+    let pCarritoVacio = document.getElementById("pCarritoVacio")
+    if(pCarritoVacio){
+        pCarritoVacio.remove()
     }
-}
-for(let x of cristaleria){
-    if(x == 1){
-        productosCarrito.push({categoria:"Cristaleria", item:"Vaso Old Fashioned", precio:1590})
-    }else if(x == 2){
-        productosCarrito.push({categoria:"Cristaleria", item:"Vaso Highball", precio:1350})
-    }else if(x == 3){
-        productosCarrito.push({categoria:"Cristaleria", item:"Vaso Hurricane", precio:2450})
-    }else if(x == 4){
-        productosCarrito.push({categoria:"Cristaleria", item:"Copa Cocktail", precio:2750})
-    }
-}
-for(let x of bebidaAlcoholica){
-    if(x == 1){
-        productosCarrito.push({categoria:"Bebidas alcohólicas", item:"Gin", precio:3500})
-    }else if(x == 2){
-        productosCarrito.push({categoria:"Bebidas alcohólicas", item:"Vodka", precio:2400})
-    }else if(x == 3){
-        productosCarrito.push({categoria:"Bebidas alcohólicas", item:"Fernet", precio:4450})
-    }else if(x == 4){
-        productosCarrito.push({categoria:"Bebidas alcohólicas", item:"Ron blanco", precio:6700})
-    }
-}
-for(let x of bebidaNoAlcoholica){
-    if(x == 1){
-        productosCarrito.push({categoria:"Bebidas no alcohólicas", item:"Agua tónica", precio:750})
-    }else if(x == 2){
-        productosCarrito.push({categoria:"Bebidas no alcohólicas", item:"Energizante", precio:850})
-    }else if(x == 3){
-        productosCarrito.push({categoria:"Bebidas no alcohólicas", item:"Coca-Cola", precio:1000})
-    }else if(x == 4){
-        productosCarrito.push({categoria:"Bebidas no alcohólicas", item:"Gaseosa de pomelo", precio:990})
+    let eliminarDelCarrito = document.getElementById(`eliminarDelCarrito${uniqueID}`)
+    eliminarDelCarrito.addEventListener(`click`,funcionEliminacionDelCarrito)
+    function funcionEliminacionDelCarrito(){
+        if(divsCarrito.parentNode){
+            divsCarrito.remove()
+        }
+        let indiceAEliminar = productosCarrito.findIndex((x) => x.nombre == `barspoon`)
+        productosCarrito.splice(indiceAEliminar,1)
+        if(productosCarrito.length == 0){
+            let pCarritoVacio = document.createElement("p")
+            pCarritoVacio.innerHTML = `<br><p id="pCarritoVacio">tu carrito de compras esta vacio</p>`
+            carrito.appendChild(pCarritoVacio)
+        }
     }
 }
 
-const mostrarProductosCarrito = []
-for(const x of productosCarrito){
-    mostrarProductosCarrito.push(x.item)
+function agregarCocteleraAlCarrito(){
+    productosCarrito.push({id:2, nombre: "coctelera", img:"./public/images/cocteleraImg", precio: 6600})
+    let divsCarrito = document.createElement("div")
+    const uniqueID = Date.now()
+    divsCarrito.innerHTML = `<div class="containerColumn">
+    <img src=${productos[1].img}></img>
+    <p>Coctelera <br> $6600 <br> <button class="eliminarDelCarrito" id="eliminarDelCarrito${uniqueID}">eliminar</button></p>
+    </div>`
+    elementosCarrito.appendChild(divsCarrito)
+    let pCarritoVacio = document.getElementById("pCarritoVacio")
+    if(pCarritoVacio){
+        pCarritoVacio.remove()
+    }
+    let eliminarDelCarrito = document.getElementById(`eliminarDelCarrito${uniqueID}`)
+    eliminarDelCarrito.addEventListener(`click`,funcionEliminacionDelCarrito)
+    function funcionEliminacionDelCarrito(){
+        if(divsCarrito.parentNode){
+            divsCarrito.remove()
+        }
+        let indiceAEliminar = productosCarrito.findIndex((x) => x.nombre == `coctelera`)
+        productosCarrito.splice(indiceAEliminar,1)
+        if(productosCarrito.length == 0){
+            let pCarritoVacio = document.createElement("p")
+            pCarritoVacio.innerHTML = `<p id="pCarritoVacio">tu carrito de compras esta vacio</p>`
+            carrito.appendChild(pCarritoVacio)
+        }
+    }
 }
-alert(`¡Muchas gracias por la compra de tu ${mostrarProductosCarrito.join(", ")}, ${nombre}!`)
+
+function agregarColadorAlCarrito(){
+    productosCarrito.push({id:3, nombre: "colador", img:"./public/images/coladorOrugaImg.jpg", precio: 3700})
+    let divsCarrito = document.createElement("div")
+    const uniqueID = Date.now()
+    divsCarrito.innerHTML = `<div class="containerColumn">
+    <img src=${productos[2].img}></img>
+    <p>Colador Oruga <br> $3700 <br> <button class="eliminarDelCarrito" id="eliminarDelCarrito${uniqueID}">eliminar</button></p>
+    </div>`
+    elementosCarrito.appendChild(divsCarrito)
+    let pCarritoVacio = document.getElementById("pCarritoVacio")
+    if(pCarritoVacio){
+        pCarritoVacio.remove()
+    }
+    let eliminarDelCarrito = document.getElementById(`eliminarDelCarrito${uniqueID}`)
+    eliminarDelCarrito.addEventListener(`click`,funcionEliminacionDelCarrito)
+    function funcionEliminacionDelCarrito(){
+        if(divsCarrito.parentNode){
+            divsCarrito.remove()
+        }
+        let indiceAEliminar = productosCarrito.findIndex((x) => x.nombre == `colador`)
+        productosCarrito.splice(indiceAEliminar,1)
+        if(productosCarrito.length == 0){
+            let pCarritoVacio = document.createElement("p")
+            pCarritoVacio.innerHTML = `<p id="pCarritoVacio">tu carrito de compras esta vacio</p>`
+            carrito.appendChild(pCarritoVacio)
+        }
+    }
+}
+function agregarJiggerAlCarrito(){
+    productosCarrito.push({id:4, nombre: "jigger", img:"./public/images/jiggerImg.jpg", precio: 3250})
+    let divsCarrito = document.createElement("div")
+    const uniqueID = Date.now()
+    divsCarrito.innerHTML = `<div class="containerColumn">
+    <img src=${productos[3].img}></img>
+    <p>Jigger <br> $3250 <br> <button class="eliminarDelCarrito" id="eliminarDelCarrito${uniqueID}">eliminar</button></p>
+    </div>`
+    elementosCarrito.appendChild(divsCarrito)
+    let pCarritoVacio = document.getElementById("pCarritoVacio")
+    if(pCarritoVacio){
+        pCarritoVacio.remove()
+    }
+    let eliminarDelCarrito = document.getElementById(`eliminarDelCarrito${uniqueID}`)
+    eliminarDelCarrito.addEventListener(`click`,funcionEliminacionDelCarrito)
+    function funcionEliminacionDelCarrito(){
+        if(divsCarrito.parentNode){
+            divsCarrito.remove()
+        }
+        let indiceAEliminar = productosCarrito.findIndex((x) => x.nombre == `jigger`)
+        productosCarrito.splice(indiceAEliminar,1)
+        if(productosCarrito.length == 0){
+            let pCarritoVacio = document.createElement("p")
+            pCarritoVacio.innerHTML = `<p id="pCarritoVacio">tu carrito de compras esta vacio</p>`
+            carrito.appendChild(pCarritoVacio)
+        }
+    }
+}
+
+
+
+

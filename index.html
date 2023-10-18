@@ -3,10 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Document</title>
 </head>
 <body>
-    
+    <header> 
+        <a href="./index.html">WEB TITLE</a>
+    </header>
+    <div id="inicioSesion">
+        <p id="leyendaInicioSesion">Por favor ingrese su usuario para continuar</p>
+        <input type="text" name="usuario" placeholder="Nombre de usuario" id="nombreDeUsuario">
+        <input type="password" name="contraseña" placeholder="Contraseña" id="contraseña">
+        <button id="botonInicioSesion"> Enviar </button>
+    </div>
+    <main>
+        <div class="utensilios">
+            <div class="containerBarspoon">
+                <h3>Barspoon</h3>
+                <p>$4000</p>
+                <button class="botonCarrito" id="addBarspoon">Agregar al carrito</button>
+            </div>
+            <div class="containerCoctelera">
+                <h3>Coctelera</h3>
+                <p>$6600</p>
+                <button class="botonCarrito" id="addCoctelera">Agregar al carrito</button>
+            </div>
+            <div>
+                <h3>Colador oruga</h3>
+                <p>$3700</p>
+                <button class="botonCarrito" id="addColador">Agregar al carrito</button>
+            </div>
+            <div>
+                <h3>Jigger</h3>
+                <p>$3250</p>
+                <button class="botonCarrito" id="addJigger">Agregar al carrito</button>
+            </div>
+        </div>
+        <!-- <div class="cristaleria">
+            <div>
+                <h3>Vaso Old Fashioned</h3>
+                <p>$1590</p>
+                <button class="botonCarrito" id="addVasoOldFashioned">Agregar al carrito</button>
+            </div>
+            <div>
+                <h3>Vaso Highball</h3>
+                <p>$1350</p>
+                <button class="botonCarrito" id="addVasoHighball">Agregar al carrito</button>
+            </div>
+            <div>
+                <h3>Copa Hurricane</h3>
+                <p>$2450</p>
+                <button class="botonCarrito" id="addCopaHurricane">Agregar al carrito</button>
+            </div>
+            <div>
+                <h3>Copa Cocktail</h3>
+                <p>$2750</p>
+                <button class="botonCarrito" id="addCopaCocktail">Agregar al carrito</button>
+            </div>
+        </div>
+        <div class="bebidasAlcoholicas">
+            <div>
+                <h3>Gin Tanqueray 750ml</h3>
+                <p>$9790</p>
+                <button class="botonCarrito" id="addGinTanqueray">Agregar al carrito</button>
+            </div>
+            <div>
+                <h3>Vodka Wyborowa 750ml</h3>
+                <p>$3900</p>
+                <button class="botonCarrito" id="addVodkaWyborowa">Agregar al carrito</button>
+            </div>
+            <div>
+                <h3>Fernet Branca 750ml</h3>
+                <p>$4040</p>
+                <button class="botonCarrito" id="addFernetBranca">Agregar al carrito</button>
+            </div>
+            <div>
+                <h3>Ron Havana Club añejo 3 años 750ml</h3>
+                <p>$5800</p>
+                <button class="botonCarrito" id="addRonHavanaClub">Agregar al carrito</button>
+            </div>
+        </div>
+        <div class="bebidasNoAlcoholicas">
+            <div>
+                <h3>Agua Tónica 1,5l</h3>
+                <p>$750</p>
+                <button class="botonCarrito" id="addAguaTonica">Agregar al carrito</button>
+            </div>
+            <div>
+                <h3>Redbull 250ml pack 4u.</h3>
+                <p>$3100</p>
+                <button class="botonCarrito" id="addRedbullPack">Agregar al carrito</button>
+            </div>
+            <div>
+                <h3>Coca-Cola 2,25l</h3>
+                <p>$1050</p>
+                <button class="botonCarrito" id="addCocaCola">Agregar al carrito</button>
+            </div>
+            <div>
+                <h3>Schweppes pomelo</h3>
+                <p>$5800</p>
+                <button class="botonCarrito" id="addSchweppesPomelo">Agregar al carrito</button>
+            </div>
+        </div> -->
+    </main>
+    <section class="carrito" id="carrito">
+        <div>
+            <p>Carrito</p>
+            <br><p id="pCarritoVacio">tu carrito de compras esta vacio</p>
+        </div>
+        <div id="elementosCarrito">
+        </div>
+    </section>
     <script src="main.js"></script>
 </body>
 </html>
