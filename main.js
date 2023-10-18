@@ -1,4 +1,3 @@
-
 const botonInicioSesion = document.getElementById("botonInicioSesion")
 const inputUsuario = document.getElementById("nombreDeUsuario")
 const inputContraseña = document.getElementById("contraseña")
@@ -73,7 +72,6 @@ function agregarBarspoonAlCarrito(){
         }
     }
 }
-
 function agregarCocteleraAlCarrito(){
     productosCarrito.push({id:2, nombre: "coctelera", img:"./public/images/cocteleraImg", precio: 6600})
     let divsCarrito = document.createElement("div")
@@ -102,7 +100,6 @@ function agregarCocteleraAlCarrito(){
         }
     }
 }
-
 function agregarColadorAlCarrito(){
     productosCarrito.push({id:3, nombre: "colador", img:"./public/images/coladorOrugaImg.jpg", precio: 3700})
     let divsCarrito = document.createElement("div")
@@ -159,7 +156,3 @@ function agregarJiggerAlCarrito(){
         }
     }
 }
-
-
-
-
